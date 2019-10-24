@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.br.regionalnews.R
 import com.br.regionalnews.model.Article
 import kotlinx.android.synthetic.main.activity_articles_list.*
@@ -25,24 +26,14 @@ class ArticlesListActivity : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val dataList = ArrayList<Article>()
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
-        dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
+        for (i in 1..10){
+            dataList.add(Article("Muito legal", "Uma breve descrição da notícia"))
+
+        }
 
         val rvAdapter = ArticleAdapter(dataList)
+
+
 
 
         recyclerView.apply {
