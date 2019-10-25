@@ -96,12 +96,13 @@
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/loginNowBtn"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@drawable/outline_btn"
                     android:text="Já tem conta? Entre."
-                    android:textColor="#18B66A" />
+                    android:textColor="#18B66A"
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>

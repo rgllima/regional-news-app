@@ -2,12 +2,60 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@+id/loginActivity"
+    app:startDestination="@+id/loginFragment"
     >
     <fragment
-        android:id="@+id/loginActivity"
-        android:name="com.br.regionalnews.view.login.LoginActivity"
-        android:label="Book Search Fragment"
-        tools:layout="@layout/activity_login">
+        android:id="@+id/loginFragment"
+        android:name="com.br.regionalnews.view.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/actionGoRegister"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@transition/slide_in_right"
+            app:exitAnim="@transition/slide_out_left"
+            app:popEnterAnim="@transition/slide_in_left"
+            app:popExitAnim="@transition/slide_out_right"
+            />
+        <action
+            android:id="@+id/actionGoHome1"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@transition/slide_in_right"
+            app:exitAnim="@transition/slide_out_left"
+            app:popEnterAnim="@transition/slide_in_left"
+            app:popExitAnim="@transition/slide_out_right"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.br.regionalnews.view.register.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/actionGoLogin"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@transition/slide_in_right"
+            app:exitAnim="@transition/slide_out_left"
+            app:popEnterAnim="@transition/slide_in_left"
+            app:popExitAnim="@transition/slide_out_right"
+            />
+        <action
+            android:id="@+id/actionGoHome2"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@transition/slide_in_right"
+            app:exitAnim="@transition/slide_out_left"
+            app:popEnterAnim="@transition/slide_in_left"
+            app:popExitAnim="@transition/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.br.regionalnews.view.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/activity_articles_list">
+
     </fragment>
 </navigation>
