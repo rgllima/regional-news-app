@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.br.regionalnews.R
 import com.br.regionalnews.model.Article
-import kotlinx.android.synthetic.main.activity_articles_list.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class ArticlesListActivity : Fragment() {
 
@@ -19,7 +18,7 @@ class ArticlesListActivity : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.activity_articles_list, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

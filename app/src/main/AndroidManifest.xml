@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".view.configuration.ConfigurationActivity"></activity>
+        <activity android:name=".view.configuration.ConfigurationFragment"></activity>
         <activity android:name=".view.article.ArticlesListActivity" />
         <activity android:name=".view.author.AuthorsListActivity" />
         <activity android:name=".MainActivity">

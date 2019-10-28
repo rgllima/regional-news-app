@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@+id/loginFragment"
+    app:startDestination="@+id/homeFragment"
     >
     <fragment
         android:id="@+id/loginFragment"
@@ -34,16 +34,16 @@
         android:label="Register"
         tools:layout="@layout/fragment_register">
         <action
-            android:id="@+id/actionGoLogin"
-            app:destination="@id/loginFragment"
+            android:id="@+id/actionGoHome2"
+            app:destination="@id/homeFragment"
             app:enterAnim="@transition/slide_in_right"
             app:exitAnim="@transition/slide_out_left"
             app:popEnterAnim="@transition/slide_in_left"
             app:popExitAnim="@transition/slide_out_right"
             />
         <action
-            android:id="@+id/actionGoHome2"
-            app:destination="@id/homeFragment"
+            android:id="@+id/actionGoLogin"
+            app:destination="@id/loginFragment"
             app:enterAnim="@transition/slide_in_right"
             app:exitAnim="@transition/slide_out_left"
             app:popEnterAnim="@transition/slide_in_left"
@@ -55,7 +55,22 @@
         android:id="@+id/homeFragment"
         android:name="com.br.regionalnews.view.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/activity_articles_list">
+        tools:layout="@layout/fragment_home">
 
+        <action
+            android:id="@+id/actionGoSettings"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@transition/slide_in_right"
+            app:exitAnim="@transition/slide_out_left"
+            app:popEnterAnim="@transition/slide_in_left"
+            app:popExitAnim="@transition/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.br.regionalnews.view.configuration.ConfigurationFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_configuration">
     </fragment>
 </navigation>
