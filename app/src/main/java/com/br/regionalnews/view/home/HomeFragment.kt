@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.br.regionalnews.R
@@ -36,6 +38,14 @@ class HomeFragment: Fragment() {
     private fun initButtons() {
         profile_image.setOnClickListener {
             findNavController().navigate(R.id.actionGoSettings)
+        }
+
+        search_article.setOnClickListener{
+            findNavController().navigate(R.id.actionOpenSearchDialog)
+        }
+
+        selected_city.setOnClickListener{
+            findNavController().navigate(R.id.actionGoSelectCity)
         }
     }
 

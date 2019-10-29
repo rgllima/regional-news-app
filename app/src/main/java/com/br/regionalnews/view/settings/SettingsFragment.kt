@@ -1,4 +1,4 @@
-package com.br.regionalnews.view.configuration
+package com.br.regionalnews.view.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.br.regionalnews.R
-import kotlinx.android.synthetic.main.fragment_configuration.*
+import kotlinx.android.synthetic.main.fragment_settings.*
 
-class ConfigurationFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
     val cidades = arrayOf("Fortaleza", "Fortin", "Cascavel", "Quixadá", "Pacajus", "Floriano")
 
@@ -21,7 +21,7 @@ class ConfigurationFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_configuration, container, false)
+        return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
     private fun initAdapters(){

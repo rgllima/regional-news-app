@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".view.configuration.ConfigurationFragment"></activity>
+        <activity android:name=".view.settings.SettingsFragment"></activity>
         <activity android:name=".view.article.ArticlesListActivity" />
         <activity android:name=".view.author.AuthorsListActivity" />
         <activity android:name=".MainActivity">
@@ -19,6 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:maxSdkVersion="18">
+    </uses-permission>
 </manifest>
