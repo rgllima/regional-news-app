@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.br.regionalnews.R
+import kotlinx.android.synthetic.main.fragment_select_city.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.fragment_settings.back_button
 
 class SettingsFragment : Fragment() {
 
@@ -17,6 +20,10 @@ class SettingsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         initAdapters()
+
+        back_button.setOnClickListener{
+            findNavController().popBackStack()
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
