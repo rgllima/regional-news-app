@@ -10,7 +10,10 @@ import com.br.regionalnews.R
 import com.br.regionalnews.model.Article
 import android.media.MediaPlayer
 import android.media.MediaPlayer.OnCompletionListener
-
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.findNavController
+import com.br.regionalnews.view.articlewebview.ArticleWebviewFragment
 
 
 class ArticleAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
@@ -29,20 +32,22 @@ class ArticleAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter
     }
     class ViewHolder(itemView: View, cont: Context) : RecyclerView.ViewHolder(itemView) {
         fun bind(context: Context){
-            itemView.setOnLongClickListener(View.OnLongClickListener {
-                val mp = MediaPlayer.create(context, R.raw.bell)
-                mp.setOnCompletionListener(OnCompletionListener { mp -> mp.release() })
-                mp.start()
 
-                itemView.setBackgroundColor(itemView.resources.getColor(R.color.colorPrimaryDark, context.theme))
+            itemView.setOnClickListener {
 
-                true
-            })
+//                itemView.setBackgroundColor(itemView.resources.getColor(R.color.colorPrimaryDark, context.theme))
+
+                val article = Article(this.name.text.toString(), this.description.text.toString())
+                itemView.findNavController().navigate(
+                    R.id.actionGoArticleWebView,
+                    ArticleWebviewFragment.createArguments(article)
+                )
+            }
+
         }
+
         val name = itemView.findViewById<TextView>(R.id.articleTitle)
         val description = itemView.findViewById<TextView>(R.id.articleDescription)
         val context: Context = cont
-
-
     }
 }

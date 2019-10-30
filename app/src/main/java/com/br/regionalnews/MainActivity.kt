@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.br.regionalnews.destinations.ArticleWebviewNavigator
 import com.br.regionalnews.destinations.SearchArticleNavigator
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -14,8 +15,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val destination = SearchArticleNavigator(navHostFragment.childFragmentManager)
-        navHostFragment.findNavController().navigatorProvider.addNavigator(destination)
+        val searchArticleNavigator = SearchArticleNavigator(supportFragmentManager)
+        navHostFragment.findNavController().navigatorProvider.addNavigator(searchArticleNavigator)
+
+        // Rever isso aqui
+        val articleWebviewNavigator = ArticleWebviewNavigator(supportFragmentManager)
+        navHostFragment.findNavController().navigatorProvider.addNavigator(articleWebviewNavigator)
 
         val inflater = navHostFragment.findNavController().navInflater
         val graph = inflater.inflate(R.navigation.navigation)

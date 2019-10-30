@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
+<navigation
+    android:id="@+id/navigation"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:startDestination="@+id/loginFragment"
     >
@@ -76,6 +78,10 @@
             android:id="@+id/actionOpenSearchDialog"
             app:destination="@id/searchDialogFragment"
             />
+        <action
+            android:id="@+id/actionGoArticleWebView"
+            app:destination="@id/articleWebviewFragment"
+            />
     </fragment>
 
     <fragment
@@ -94,4 +100,7 @@
 
     <search_article
         android:id="@+id/searchDialogFragment" />
+
+    <article_webview
+        android:id="@+id/articleWebviewFragment" />
 </navigation>
