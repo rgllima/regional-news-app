@@ -8,5 +8,6 @@ data class Article (
     @SerializedName("description") val description: String,
     @SerializedName("url") val url: String,
     @SerializedName("imageURL") val imageURL: String? = null,
-    @SerializedName("simpleReading") val simpleReading: Boolean = false
+    @SerializedName("simpleReading") val simpleReading: Boolean,
+    @SerializedName("_id") val _id: String
 ) : Serializable

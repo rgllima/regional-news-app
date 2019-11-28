@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 data class ApiArticleIndexer(
     @SerializedName("results") val results: String,
     @SerializedName("page") val page: Int,
-    @SerializedName("message") val message: String,
+//    @SerializedName("message") val message: String,
     @SerializedName("data") val list: ArrayList<Article>
 )

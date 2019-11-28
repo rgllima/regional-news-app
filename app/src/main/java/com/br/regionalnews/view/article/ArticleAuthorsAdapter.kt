@@ -10,9 +10,10 @@ import com.br.regionalnews.R
 import com.br.regionalnews.model.Article
 import androidx.navigation.findNavController
 import com.br.regionalnews.view.articlewebview.ArticleWebviewFragment
+import com.br.regionalnews.view.articlewriter.ArticleWriterFragment
 
 
-class ArticleAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+class ArticleAuthorsAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter<ArticleAuthorsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val v = LayoutInflater.from(p0.context).inflate(R.layout.article_item, p0, false)
@@ -30,7 +31,7 @@ class ArticleAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter
         p0.url = articleList[p1].url
         p0.imageUrl = articleList[p1].imageURL
         p0.simpleReading = articleList[p1].simpleReading
-        p0.id = articleList[p1]._id
+        p0._id = articleList[p1]._id
         p0.bind(p0.context)
     }
 
@@ -39,10 +40,10 @@ class ArticleAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter
 
             itemView.setOnClickListener {
 
-                val article = Article(this.name.text.toString(), this.description.text.toString(), this.url, this.imageUrl, this.simpleReading, this.id)
+                val article = Article(this.name.text.toString(), this.description.text.toString(), this.url, this.imageUrl, this.simpleReading, this._id)
                 itemView.findNavController().navigate(
-                    R.id.actionGoArticleWebView,
-                    ArticleWebviewFragment.createArguments(article)
+                    R.id.actionGoArticleWriter,
+                    ArticleWriterFragment.createArguments(article)
                 )
             }
 
@@ -53,7 +54,7 @@ class ArticleAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter
         var url: String = ""
         var imageUrl: String? = null
         var simpleReading: Boolean = false;
-        var id: String = ""
+        var _id: String = ""
         val context: Context = cont
     }
 }

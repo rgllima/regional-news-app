@@ -83,10 +83,10 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/input_bg"
                     android:ems="10"
+                    android:hint="Título da publicação"
                     android:inputType="textPersonName"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Título da publicação" />
+                    android:paddingRight="10dp" />
 
                 <EditText
                     android:id="@+id/articleText"
@@ -95,8 +95,8 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/input_bg"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Conteúdo da publicação" />
+                    android:hint="Conteúdo da publicação"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <LinearLayout
