@@ -89,6 +89,36 @@
         android:name="com.br.regionalnews.view.settings.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/actionGoAuthorsListFragment"
+            app:destination="@id/articleAuthorList"
+            app:enterAnim="@transition/slide_in_right"
+            app:exitAnim="@transition/slide_out_left"
+            app:popEnterAnim="@transition/slide_in_left"
+            app:popExitAnim="@transition/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/articleAuthorList"
+        android:name="com.br.regionalnews.view.articleauthorslist.ArticleAuthorsListFragment"
+        android:label="Article Authors List"
+        tools:layout="@layout/fragment_article_author_list">
+        <action
+            android:id="@+id/actionGoArticleWriter"
+            app:destination="@id/articleWriter"
+            app:enterAnim="@transition/slide_in_right"
+            app:exitAnim="@transition/slide_out_left"
+            app:popEnterAnim="@transition/slide_in_left"
+            app:popExitAnim="@transition/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/articleWriter"
+        android:name="com.br.regionalnews.view.articlewriter.ArticleWriterFragment"
+        android:label="Article Writer"
+        tools:layout="@layout/fragment_article_write">
     </fragment>
 
     <fragment

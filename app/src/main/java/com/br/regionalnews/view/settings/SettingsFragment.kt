@@ -23,6 +23,11 @@ class SettingsFragment : Fragment() {
         back_button2.setOnClickListener{
             findNavController().popBackStack()
         }
+
+        changeUserTypeBtn.setOnClickListener {
+//            findNavController().popBackStack()
+            findNavController().navigate(R.id.actionGoAuthorsListFragment)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -64,6 +64,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo de Usuário" />
+
+        <Button
+            android:id="@+id/changeUserTypeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sou Autor" />
+
+        <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +112,7 @@
 
         <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/radioButton2"
