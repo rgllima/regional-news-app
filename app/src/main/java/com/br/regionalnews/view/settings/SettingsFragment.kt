@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.br.regionalnews.R
 import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.fragment_settings.back_button
+import kotlinx.android.synthetic.main.fragment_settings.back_button2
 
 class SettingsFragment : Fragment() {
 
@@ -20,7 +20,7 @@ class SettingsFragment : Fragment() {
 
         initAdapters()
 
-        back_button.setOnClickListener{
+        back_button2.setOnClickListener{
             findNavController().popBackStack()
         }
     }

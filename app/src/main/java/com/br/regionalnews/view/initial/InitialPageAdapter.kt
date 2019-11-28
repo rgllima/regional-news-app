@@ -3,7 +3,6 @@ package com.br.regionalnews.view.initial
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.br.regionalnews.view.article.ArticlesListActivity
 import com.br.regionalnews.view.author.AuthorsListActivity
 
 class InitialPageAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {

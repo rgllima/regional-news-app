@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.*
+import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.MutableLiveData
@@ -44,8 +45,22 @@ class ArticleWebviewFragment: DialogFragment() {
             val description = it?.description
 
             news_title.text = title
-            webViewTitle.text = title
-            webViewDescription.text = description
+
+            when (it.simpleReading) {
+                // Exibir informações com conteúdo carregado a partir do Regional News
+                true -> {
+                    webViewTitle.text = title
+                    webViewDescription.text = description
+                }
+
+                // Exibir o Webview com conteúdo carregado do Website do autor da publicação
+                false -> {
+                    simpleReaderWv.visibility = View.GONE
+                    mainWebview.settings.builtInZoomControls = true
+                    mainWebview.settings.displayZoomControls = false
+                    mainWebview.loadUrl(it.url)
+                }
+            }
 
             Toast.makeText(requireContext(), "$title - $description", Toast.LENGTH_SHORT).show()
         })
