@@ -101,7 +101,7 @@
 
     <fragment
         android:id="@+id/articleAuthorList"
-        android:name="com.br.regionalnews.view.articleauthorslist.ArticleAuthorsListFragment"
+        android:name="com.br.regionalnews.view.ArticleAuthorsFragment"
         android:label="Article Authors List"
         tools:layout="@layout/fragment_article_author_list">
         <action
