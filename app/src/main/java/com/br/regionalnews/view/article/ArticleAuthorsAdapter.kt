@@ -13,7 +13,7 @@ import com.br.regionalnews.view.articlewebview.ArticleWebviewFragment
 import com.br.regionalnews.view.articlewriter.ArticleWriterFragment
 
 
-class ArticleAuthorsAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter<ArticleAuthorsAdapter.ViewHolder>() {
+class ArticleAuthorsAdapter(val articleList: List<Article>) : RecyclerView.Adapter<ArticleAuthorsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val v = LayoutInflater.from(p0.context).inflate(R.layout.article_item, p0, false)
