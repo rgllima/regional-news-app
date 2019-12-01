@@ -32,9 +32,13 @@ class ArticleAuthorsFragment : Fragment() {
             initRecyclerView(it)
         })
 
-        initButtons()
-
         return inflater.inflate(R.layout.fragment_article_author_list, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        initButtons()
     }
 
     private fun initButtons(){
