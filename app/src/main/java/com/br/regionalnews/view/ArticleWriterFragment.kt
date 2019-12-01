@@ -1,4 +1,4 @@
-package com.br.regionalnews.view.articlewriter
+package com.br.regionalnews.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import com.br.regionalnews.R
-import com.br.regionalnews.config.ApiResponse
 import com.br.regionalnews.config.RetrofitInstance
 import com.br.regionalnews.config.SaveArticleRequest
 import com.br.regionalnews.model.Article
 import com.br.regionalnews.view.articlewebview.ArticleWebviewFragment
-import kotlinx.android.synthetic.main.article_webview_fragment.*
 import kotlinx.android.synthetic.main.fragment_article_write.*
 import retrofit2.Call
 import retrofit2.Callback

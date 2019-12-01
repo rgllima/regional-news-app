@@ -116,7 +116,7 @@
 
     <fragment
         android:id="@+id/articleWriter"
-        android:name="com.br.regionalnews.view.articlewriter.ArticleWriterFragment"
+        android:name="com.br.regionalnews.view.ArticleWriterFragment"
         android:label="Article Writer"
         tools:layout="@layout/fragment_article_write">
     </fragment>

@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.br.regionalnews.R
 import com.br.regionalnews.model.Article
 import androidx.navigation.findNavController
-import com.br.regionalnews.view.articlewebview.ArticleWebviewFragment
-import com.br.regionalnews.view.articlewriter.ArticleWriterFragment
+import com.br.regionalnews.view.ArticleWriterFragment
 
 
 class ArticleAuthorsAdapter(val articleList: List<Article>) : RecyclerView.Adapter<ArticleAuthorsAdapter.ViewHolder>() {
