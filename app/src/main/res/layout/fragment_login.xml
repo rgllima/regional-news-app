@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/gradient_btn"
+            android:background="@drawable/button_green_gradient"
             android:shadowColor="#FFFF"
             android:text="Entrar"
             android:textColor="#FFFF"
@@ -63,7 +63,7 @@
             android:id="@+id/registerNowBtn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/outline_btn"
+            android:background="@drawable/button_outlined"
             android:text="Cadastre-se agora"
             android:textColor="#18B66A"
             android:textSize="18sp" />
