@@ -53,7 +53,6 @@ class ArticleWebviewFragment: DialogFragment() {
                     webViewDescription.text = description
                 }
 
-                // Exibir o Webview com conteúdo carregado do Website do autor da publicação
                 false -> {
                     simpleReaderWv.visibility = View.GONE
                     mainWebview.settings.builtInZoomControls = true
@@ -61,8 +60,6 @@ class ArticleWebviewFragment: DialogFragment() {
                     mainWebview.loadUrl(it.url)
                 }
             }
-
-            Toast.makeText(requireContext(), "$title - $description", Toast.LENGTH_SHORT).show()
         })
     }
 
