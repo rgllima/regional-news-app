@@ -39,7 +39,7 @@
                 android:id="@+id/logout"
                 android:layout_width="27dp"
                 android:layout_height="27dp"
-                android:src="@drawable/logout"></ImageView>
+                android:src="@drawable/ic_logout"></ImageView>
         </LinearLayout>
 
     </LinearLayout>
@@ -47,15 +47,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewAuthor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addArticle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_marginTop="-70dp"
+        android:layout_marginRight="15dp"
         android:clickable="true"
         app:backgroundTint="#18B66A"
         app:srcCompat="@drawable/plus" />
