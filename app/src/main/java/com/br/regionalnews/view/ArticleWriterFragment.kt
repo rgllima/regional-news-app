@@ -7,11 +7,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.br.regionalnews.R
 import com.br.regionalnews.config.RetrofitInstance
 import com.br.regionalnews.config.SaveArticleRequest
+import com.br.regionalnews.factories.ArticleAuthorsViewModelFactory
+import com.br.regionalnews.factories.ArticleWriterViewModelFactory
 import com.br.regionalnews.model.Article
+import com.br.regionalnews.repository.ArticleRepository
 import com.br.regionalnews.view.articlewebview.ArticleWebviewFragment
+import com.br.regionalnews.viewmodel.ArticleAuthorsViewModel
+import com.br.regionalnews.viewmodel.ArticleWriterViewModel
 import kotlinx.android.synthetic.main.fragment_article_write.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,22 +27,39 @@ import java.util.*
 
 class ArticleWriterFragment : Fragment() {
 
+    lateinit var viewModel: ArticleWriterViewModel
+
     val article: MutableLiveData<Article> = MutableLiveData()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         loadArguments(arguments)
         initButtons()
+        viewModel = createViewModel()
 
         article.observe(this, androidx.lifecycle.Observer {
             if(article.value != null){
                 this.initButtons()
-                this.updateValues();
+                this.updateValues()
 
             }
         })
 
 
+        viewModel.loading.observe(this, androidx.lifecycle.Observer {
+            if(it){
+                loadingWriteFrag.visibility = View.VISIBLE
+            }else {
+                loadingWriteFrag.visibility = View.GONE
+            }
+        })
+
+        viewModel.message.observe(this, androidx.lifecycle.Observer {
+            if(!it.isEmpty()){
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     fun updateValues(){
@@ -49,59 +73,54 @@ class ArticleWriterFragment : Fragment() {
     }
 
     fun initButtons(){
+        article_publish_back_btn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        articleArchiveBtn.setOnClickListener {
+            viewModel.archiveArticle(article.value!!.title, article.value!!.description, article.value?._id)
+        }
+
+        articleDraftBtn.setOnClickListener {
+            var title = articleTitle.text.toString()
+            var text = articleText.text.toString()
+            viewModel.draftArticle(title, text, article.value?._id)
+        }
+
+        articleDraftBtn.visibility = if (this.article.value == null) View.VISIBLE else View.GONE
+        articleArchiveBtn.visibility = if (article.value?.isArchived == false) View.VISIBLE else View.GONE
 
         if(this.article.value == null){
-            articleDraftBtn.visibility = View.VISIBLE
-
             articlePublishBtn.setOnClickListener {
-                var titulo = articleTitle
-                var texto = articleText
+                var title = articleTitle.text.toString()
+                var text = articleText.text.toString()
 
-                val req = SaveArticleRequest("400a7465-93db-41aa-8d5f-7b87e3fd5c8d", "93dff14d-3d28-4591-bbea-3b8a6df1575a", "806b5c62-637e-454c-98c5-26a402520863", titulo.text.toString()
-                    , titulo.text.toString(), texto.text.toString(), "2019-05-05T23:07:01.524Z", "", "Victor", Arrays.asList("oi", "tim"), "pt-BR", false, true, article.value?._id)
-
-                RetrofitInstance.articleService().crate(req).enqueue(object: Callback<Article?> {
-                    override fun onResponse(call: Call<Article?>, response: Response<Article?>?) {
-                        response?.body()?.let {
-
-                            Toast.makeText(context, "SALVO HAHA", Toast.LENGTH_SHORT).show()
-
-
-                        }
-                    }
-
-                    override fun onFailure(call: Call<Article?>, t: Throwable) {
-                        Toast.makeText(context, "Ocorreu um erro! ${t.message}", Toast.LENGTH_SHORT).show()
-                    }
-                })
+                viewModel.saveArticle(title, text, "")
             }
         }else {
-            articleDraftBtn.visibility = View.INVISIBLE
-            articlePublishBtn.setText("Editar")
+            if(!article.value!!.isArchived) {
+                articlePublishBtn.setText("Editar")
+            }else {
+                articlePublishBtn.setText("Editar e desarquivar")
+            }
 
             articlePublishBtn.setOnClickListener {
-                val req = SaveArticleRequest("400a7465-93db-41aa-8d5f-7b87e3fd5c8d", "93dff14d-3d28-4591-bbea-3b8a6df1575a", "806b5c62-637e-454c-98c5-26a402520863", articleTitle.text.toString()
-                    , articleTitle.text.toString(), articleText.text.toString(), "2019-05-05T23:07:01.524Z", "", "Victor", Arrays.asList("oi", "tim"), "pt-BR", false, true, article.value?._id)
+                var title = articleTitle.text.toString()
+                var text = articleText.text.toString()
 
-                RetrofitInstance.articleService().update(req).enqueue(object: Callback<Article?> {
-                    override fun onResponse(call: Call<Article?>, response: Response<Article?>?) {
-                        response?.body()?.let {
-
-                            Toast.makeText(context, "EDITADO", Toast.LENGTH_SHORT).show()
-
-
-                        }
-                    }
-
-                    override fun onFailure(call: Call<Article?>, t: Throwable) {
-                        Toast.makeText(context, "Ocorreu um erro! ${t.message}", Toast.LENGTH_SHORT).show()
-                    }
-                })
+                viewModel.editArticle(title, text, article.value?._id)
             }
+
         }
 
 
 
+    }
+
+    private fun createViewModel(): ArticleWriterViewModel {
+        val factory = ArticleWriterViewModelFactory(ArticleRepository, activity?.application!!)
+
+        return ViewModelProviders.of(this, factory).get(ArticleWriterViewModel::class.java)
     }
 
     companion object {
