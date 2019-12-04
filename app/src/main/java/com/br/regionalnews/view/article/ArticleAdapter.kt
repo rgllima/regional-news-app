@@ -10,9 +10,11 @@ import com.br.regionalnews.R
 import com.br.regionalnews.model.Article
 import androidx.navigation.findNavController
 import com.br.regionalnews.view.articlewebview.ArticleWebviewFragment
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class ArticleAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+class ArticleAdapter(val articleList: List<Article>) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val v = LayoutInflater.from(p0.context).inflate(R.layout.article_item, p0, false)
@@ -31,6 +33,8 @@ class ArticleAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter
         p0.imageUrl = articleList[p1].imageURL
         p0.simpleReading = articleList[p1].simpleReading
         p0.id = articleList[p1]._id
+        p0.date = articleList[p1].uploadedAt
+        p0.isDraft = articleList[p1].isDraft
         p0.bind(p0.context)
     }
 
@@ -39,7 +43,7 @@ class ArticleAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter
 
             itemView.setOnClickListener {
 
-                val article = Article(this.name.text.toString(), this.description.text.toString(), this.url, this.imageUrl, this.simpleReading, this.id)
+                val article = Article(this.name.text.toString(), this.description.text.toString(), this.url, this.imageUrl, this.simpleReading, this.id, false, this.date, this.isDraft)
                 itemView.findNavController().navigate(
                     R.id.actionGoArticleWebView,
                     ArticleWebviewFragment.createArguments(article)
@@ -50,10 +54,13 @@ class ArticleAdapter(val articleList: ArrayList<Article>) : RecyclerView.Adapter
 
         val name = itemView.findViewById<TextView>(R.id.articleTitle)
         val description = itemView.findViewById<TextView>(R.id.articleDescription)
+
         var url: String = ""
         var imageUrl: String? = null
         var simpleReading: Boolean = false;
         var id: String = ""
+        var date: Date = Date()
+        var isDraft: Boolean = false
         val context: Context = cont
     }
 }
