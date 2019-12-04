@@ -17,7 +17,7 @@ interface ArticleService {
     fun getMyArticles(): Call<ApiResponse>
 
     @POST("news/create")
-    fun crate(@Body article: SaveArticleRequest): Call<Article>
+    fun save(@Body article: SaveArticleRequest): Call<Article>
 
     @POST("news/update")
     fun update(@Body article: SaveArticleRequest): Call<Article>
