@@ -12,7 +12,7 @@ import com.br.regionalnews.R
 import com.br.regionalnews.model.Article
 import androidx.navigation.findNavController
 import com.br.regionalnews.view.ArticleWriterFragment
-import com.github.debop.javatimes.NowLocalDateTime
+
 import java.util.*
 
 
