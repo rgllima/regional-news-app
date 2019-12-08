@@ -14,7 +14,7 @@ class ArticleWriterViewModel constructor(private val repository: ArticleReposito
     val loading = MutableLiveData<Boolean>().apply { value = false }
     val message = MutableLiveData<String>().apply { value = "" }
 
-    private fun getArticleFrom(title: String, text: String, id: String?, isDraft: Boolean, isArchived: Boolean): SaveArticleRequest {
+    private fun getArticleFrom(title: String, text: String, id: String?, isDraft: Boolean, isArchived: Boolean, image: String?): SaveArticleRequest {
         return SaveArticleRequest(
             "400a7465-93db-41aa-8d5f-7b87e3fd5c8d",
             "93dff14d-3d28-4591-bbea-3b8a6df1575a",
@@ -30,13 +30,14 @@ class ArticleWriterViewModel constructor(private val repository: ArticleReposito
             isDraft,
             true,
             id,
-            isArchived);
+            isArchived,
+            image)
     }
 
     fun editArticle(title: String, text: String, id: String?){
         loading.postValue(true)
 
-        var article = this.getArticleFrom(title, text, id,false,false)
+        var article = this.getArticleFrom(title, text, id,false,false, null)
 
         repository.update(article, {
             loading.postValue(false)
@@ -47,12 +48,12 @@ class ArticleWriterViewModel constructor(private val repository: ArticleReposito
         })
     }
 
-    fun saveArticle(title: String, text: String, id: String?){
+    fun saveArticle(image: String, title: String, text: String, id: String?){
         loading.postValue(true)
 
-        var article = this.getArticleFrom(title, text, id,false,false)
+        var article = this.getArticleFrom(title, text, id,false,false, image)
 
-        repository.update(article, {
+        repository.save(article, {
             loading.postValue(false)
             message.postValue("Notícia criada com sucesso!")
         }, {
@@ -64,7 +65,7 @@ class ArticleWriterViewModel constructor(private val repository: ArticleReposito
     fun archiveArticle(title: String, text: String, id: String?){
         loading.postValue(true)
 
-        var article = this.getArticleFrom(title, text, id,false,true)
+        var article = this.getArticleFrom(title, text, id,false,true, null)
 
         repository.update(article, {
             loading.postValue(false)
@@ -78,7 +79,7 @@ class ArticleWriterViewModel constructor(private val repository: ArticleReposito
     fun draftArticle(title: String, text: String, id: String?){
         loading.postValue(true)
 
-        var article = this.getArticleFrom(title, text, id,true,false)
+        var article = this.getArticleFrom(title, text, id,true,false, null)
 
         repository.save(article, {
             loading.postValue(false)

@@ -1,10 +1,19 @@
 package com.br.regionalnews.view
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Build.VERSION
+import android.os.Build.VERSION.*
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProviders
@@ -24,12 +33,27 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import com.google.android.gms.common.util.IOUtils.toByteArray
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.widget.ImageView
+import androidx.core.graphics.drawable.toBitmap
+import java.io.ByteArrayOutputStream
+
 
 class ArticleWriterFragment : Fragment() {
 
     lateinit var viewModel: ArticleWriterViewModel
 
     val article: MutableLiveData<Article> = MutableLiveData()
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            holderImageView.visibility = View.VISIBLE
+            image_view.setImageURI(data?.data)
+            selectImageBtn.visibility = View.GONE
+        }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -45,7 +69,6 @@ class ArticleWriterFragment : Fragment() {
 
             }
         })
-
 
         viewModel.loading.observe(this, androidx.lifecycle.Observer {
             if(it){
@@ -69,10 +92,77 @@ class ArticleWriterFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_article_write, container, false)
+        return inflater.inflate(com.br.regionalnews.R.layout.fragment_article_write, container, false)
     }
 
+    private fun pickImageFromGallery() {
+        //Intent to pick image
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    //handle requested permission result
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if (grantResults.size >0 && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED){
+                    //permission from popup granted
+                    pickImageFromGallery()
+                }
+                else{
+                    //permission from popup denied
+                    Log.d("==================", "Falha ao ler permissões!")
+                }
+            }
+        }
+    }
+
+
     fun initButtons(){
+        image_view.setOnClickListener {
+            //check runtime permission
+            if (SDK_INT >= Build.VERSION_CODES.M){
+                if (checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)  ==
+                    PackageManager.PERMISSION_DENIED){
+                    //permission denied
+                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
+                    //show popup to request runtime permission
+                    requestPermissions(permissions, PERMISSION_CODE);
+                }
+                else{
+                    //permission already granted
+                    pickImageFromGallery();
+                }
+            }
+            else{
+                //system OS is < Marshmallow
+                pickImageFromGallery();
+            }
+        }
+
+        selectImageBtn.setOnClickListener {
+            //check runtime permission
+            if (SDK_INT >= Build.VERSION_CODES.M){
+                if (checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)  ==
+                    PackageManager.PERMISSION_DENIED){
+                    //permission denied
+                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
+                    //show popup to request runtime permission
+                    requestPermissions(permissions, PERMISSION_CODE);
+                }
+                else{
+                    //permission already granted
+                    pickImageFromGallery();
+                }
+            }
+            else{
+                //system OS is < Marshmallow
+                pickImageFromGallery();
+            }
+        }
+
         article_publish_back_btn.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -92,10 +182,18 @@ class ArticleWriterFragment : Fragment() {
 
         if(this.article.value == null){
             articlePublishBtn.setOnClickListener {
+
+                val bitmap = image_view.drawable.toBitmap()
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+                val bytearray = baos.toByteArray()
+                val img_str = Base64.getEncoder().encodeToString(bytearray)
+
+                var image = img_str
                 var title = articleTitle.text.toString()
                 var text = articleText.text.toString()
 
-                viewModel.saveArticle(title, text, "")
+                viewModel.saveArticle(image, title, text, "")
             }
         }else {
             if(!article.value!!.isArchived) {
@@ -124,6 +222,10 @@ class ArticleWriterFragment : Fragment() {
     }
 
     companion object {
+        //image pick code
+        private val IMAGE_PICK_CODE = 1000;
+        //Permission code
+        private val PERMISSION_CODE = 1001;
         private const val ARTICLE_ARGUMENT = "article"
 
         fun createArguments(article: Article): Bundle {

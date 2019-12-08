@@ -15,7 +15,7 @@ class ArticleAuthorsViewModel constructor(private val repository: ArticleReposit
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun load() {
-        repository.listAll({ items ->
+        repository.listAllByUser({ items ->
             articles.value = (items)
         }, {
             Log.d("ArticleAuthorsViewModel", "Erro ao carregar itens...")
